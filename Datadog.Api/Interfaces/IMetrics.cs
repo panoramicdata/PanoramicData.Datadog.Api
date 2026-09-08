@@ -80,7 +80,7 @@ public interface IMetrics
 	[Get("/v1/metrics/{metricName}")]
 	Task<MetricMetadataResponse> GetMetadataAsync(
 		[Query("metricName")] string metricName,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 
 	/// <summary>
@@ -93,7 +93,7 @@ public interface IMetrics
 	[Get("/v2/metrics/{metricName}/assets")]
 	Task<MetricMetadataResponse> GetRelatedAssetsAsync(
 		[Query("metricName")] string metricName,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Query timeseries points. This endpoint requires the timeseries_query authorization scope.

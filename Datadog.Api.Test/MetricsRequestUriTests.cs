@@ -75,6 +75,24 @@ public class MetricsRequestUriTests
 		viaObject.Should().Be("/v2/metrics");
 		viaObject.Should().Be(viaLegacy);
 	}
+
+	[Fact]
+	public async Task GetMetadata_RequiresCancellationToken_AndBuildsPath()
+	{
+		var uri = await RequestUriTestHarness.CaptureUriAsync<IMetrics>(
+			api => api.GetMetadataAsync("system.cpu.idle", CancellationToken));
+
+		uri.Should().StartWith("/v1/metrics/system.cpu.idle");
+	}
+
+	[Fact]
+	public async Task GetRelatedAssets_RequiresCancellationToken_AndBuildsPath()
+	{
+		var uri = await RequestUriTestHarness.CaptureUriAsync<IMetrics>(
+			api => api.GetRelatedAssetsAsync("system.cpu.idle", CancellationToken));
+
+		uri.Should().StartWith("/v2/metrics/system.cpu.idle/assets");
+	}
 }
 
 #pragma warning restore CS0618
