@@ -1,5 +1,7 @@
 ﻿namespace Datadog.Api.Test;
 
+#pragma warning disable CS0618 // TODO Task 8: migrate to request-object overloads
+
 public class MetricTests(DatadogClientFixture fixture, ITestOutputHelper output) : BaseTest(fixture, output)
 {
 	[Fact]
@@ -102,3 +104,5 @@ public class MetricTests(DatadogClientFixture fixture, ITestOutputHelper output)
 		}
 	}
 }
+
+#pragma warning restore CS0618

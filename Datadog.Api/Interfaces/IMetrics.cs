@@ -12,11 +12,23 @@ public interface IMetrics
 	/// <summary>
 	/// Get Metrics
 	/// </summary>
+	/// <param name="request">The query parameters.</param>
+	/// <param name="cancellationToken">The cancellation token</param>
+	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-active-metrics-list"/>
+	[Get("/v1/metrics")]
+	Task<ActiveMetricsResponse> GetActiveAsync(
+		GetActiveMetricsRequest request,
+		CancellationToken cancellationToken);
+
+	/// <summary>
+	/// Get Metrics
+	/// </summary>
 	/// <param name="from">Seconds since the Unix epoch.</param>
 	/// <param name="host">Optional: Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag.</param>
 	/// <param name="tagFilter">Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions. Cannot be combined with other filters.</param>
 	/// <param name="cancellationToken">The cancellation token</param>
 	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-active-metrics-list"/>
+	[Obsolete("Use the GetActiveMetricsRequest overload. This method will be removed in 3.0.")]
 	[Get("/v1/metrics")]
 	Task<ActiveMetricsResponse> GetActiveAsync(
 		[AliasAs("from")] long from,
