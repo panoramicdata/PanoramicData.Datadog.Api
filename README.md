@@ -25,3 +25,21 @@ var client = new DatadogClient(new()
 
 var users = await client.Users.GetAllAsync();
 ```
+
+## Filtered requests
+
+Endpoints that accept query filters take a request object:
+
+```csharp
+var metrics = await client.Metrics.GetMetricsAsync(
+    new GetMetricsRequest
+    {
+        FilterConfigured = true,
+        FilterMetricType = MetricType.Gauge,
+        WindowSeconds = 3600
+    },
+    cancellationToken);
+```
+
+The older overloads that took each filter as an optional parameter are obsolete and will be
+removed in 3.0. They produce identical requests, so migration is mechanical.
