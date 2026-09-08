@@ -3,8 +3,6 @@ using System.Globalization;
 
 namespace Datadog.Api.Test;
 
-#pragma warning disable CS0618 // TODO Task 8: migrate to request-object overloads
-
 public class UsageTests(DatadogClientFixture fixture, ITestOutputHelper output) : BaseTest(fixture, output)
 {
 	[Fact]
@@ -20,10 +18,13 @@ public class UsageTests(DatadogClientFixture fixture, ITestOutputHelper output) 
 		// Act
 		var result = await ExecuteApiCallAsync(
 			() => Client.Usage.GetHourlyUsageAsync(
-				startDate,
-				endDate,
-				[ProductFamily.All],
-				cancellationToken: CancellationToken),
+				new GetHourlyUsageRequest
+				{
+					StartHour = startDate,
+					EndHour = endDate,
+					ProductFamilies = [ProductFamily.All]
+				},
+				CancellationToken),
 			nameof(Get_HourlyUsage_Succeeds));
 
 		// Assert
@@ -43,15 +44,16 @@ public class UsageTests(DatadogClientFixture fixture, ITestOutputHelper output) 
 		// Act
 		var result = await ExecuteApiCallAsync(
 			() => Client.Usage.GetHourlyUsageAttributionAsync(
-				startDate,
-				endDate,
-				UsageType.ApiUsage,
-				cancellationToken: CancellationToken),
+				new GetHourlyUsageAttributionRequest
+				{
+					StartHour = startDate,
+					EndHour = endDate,
+					UsageType = UsageType.ApiUsage
+				},
+				CancellationToken),
 			nameof(Get_HourlyUsageAttribution_Succeeds));
 
 		// Assert
 		result.Should().NotBeNull();
 	}
 }
-
-#pragma warning restore CS0618

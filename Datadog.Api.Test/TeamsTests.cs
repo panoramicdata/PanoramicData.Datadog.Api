@@ -1,6 +1,6 @@
-﻿namespace Datadog.Api.Test;
+﻿using Datadog.Api.Models.Teams;
 
-#pragma warning disable CS0618 // TODO Task 8: migrate to request-object overloads
+namespace Datadog.Api.Test;
 
 public class TeamsTests(DatadogClientFixture fixture, ITestOutputHelper output) : BaseTest(fixture, output)
 {
@@ -9,12 +9,10 @@ public class TeamsTests(DatadogClientFixture fixture, ITestOutputHelper output) 
 	{
 		// Act
 		var result = await ExecuteApiCallAsync(
-			() => Client.Teams.GetAsync(cancellationToken: CancellationToken),
+			() => Client.Teams.GetAsync(new GetTeamsRequest(), CancellationToken),
 			nameof(Get_Page_Succeeds));
 
 		// Assert
 		result.Should().NotBeNull();
 	}
 }
-
-#pragma warning restore CS0618
