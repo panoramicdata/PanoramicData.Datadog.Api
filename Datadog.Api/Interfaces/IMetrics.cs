@@ -12,17 +12,41 @@ public interface IMetrics
 	/// <summary>
 	/// Get Metrics
 	/// </summary>
+	/// <param name="request">The query parameters.</param>
+	/// <param name="cancellationToken">The cancellation token</param>
+	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-active-metrics-list"/>
+	[Get("/v1/metrics")]
+	Task<ActiveMetricsResponse> GetActiveAsync(
+		GetActiveMetricsRequest request,
+		CancellationToken cancellationToken);
+
+	/// <summary>
+	/// Get Metrics
+	/// </summary>
 	/// <param name="from">Seconds since the Unix epoch.</param>
 	/// <param name="host">Optional: Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag.</param>
 	/// <param name="tagFilter">Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions. Cannot be combined with other filters.</param>
 	/// <param name="cancellationToken">The cancellation token</param>
 	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-active-metrics-list"/>
+	[Obsolete("Use the GetActiveMetricsRequest overload. This method will be removed in 3.0.")]
 	[Get("/v1/metrics")]
 	Task<ActiveMetricsResponse> GetActiveAsync(
 		[AliasAs("from")] long from,
 		[AliasAs("host")] string? host = null,
 		[AliasAs("tag_filter")] string? tagFilter = null,
 		CancellationToken cancellationToken = default);
+
+	/// <summary>
+	/// Get a list of metrics.
+	/// Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified). This endpoint requires the metrics_read authorization scope.
+	/// </summary>
+	/// <param name="request">The query parameters.</param>
+	/// <param name="cancellationToken">The cancellation token</param>
+	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-a-list-of-metrics"/>
+	[Get("/v2/metrics")]
+	Task<MetricsResponse> GetMetricsAsync(
+		GetMetricsRequest request,
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get a list of metrics.
@@ -36,7 +60,8 @@ public interface IMetrics
 	/// <param name="filterTags">Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions. Can only be combined with the filter[queried] filter.</param>
 	/// <param name="windowSeconds">The number of seconds of look back (from now) to apply to a filter[tag] or filter[queried] query. Default value is 3600 (1 hour), maximum value is 2,592,000 (30 days).</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-a-list-of-metrics"/>"
+	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-a-list-of-metrics"/>
+	[Obsolete("Use the GetMetricsRequest overload. This method will be removed in 3.0.")]
 	[Get("/v2/metrics")]
 	Task<MetricsResponse> GetMetricsAsync(
 		[AliasAs("filter[configured]")] bool? filterConfigured = null,
@@ -55,7 +80,7 @@ public interface IMetrics
 	[Get("/v1/metrics/{metricName}")]
 	Task<MetricMetadataResponse> GetMetadataAsync(
 		[Query("metricName")] string metricName,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 
 	/// <summary>
@@ -68,7 +93,7 @@ public interface IMetrics
 	[Get("/v2/metrics/{metricName}/assets")]
 	Task<MetricMetadataResponse> GetRelatedAssetsAsync(
 		[Query("metricName")] string metricName,
-		CancellationToken cancellationToken = default);
+		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Query timeseries points. This endpoint requires the timeseries_query authorization scope.

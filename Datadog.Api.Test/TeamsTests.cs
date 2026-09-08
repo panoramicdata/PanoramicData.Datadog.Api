@@ -1,4 +1,6 @@
-﻿namespace Datadog.Api.Test;
+﻿using Datadog.Api.Models.Teams;
+
+namespace Datadog.Api.Test;
 
 public class TeamsTests(DatadogClientFixture fixture, ITestOutputHelper output) : BaseTest(fixture, output)
 {
@@ -7,7 +9,7 @@ public class TeamsTests(DatadogClientFixture fixture, ITestOutputHelper output) 
 	{
 		// Act
 		var result = await ExecuteApiCallAsync(
-			() => Client.Teams.GetAsync(cancellationToken: CancellationToken),
+			() => Client.Teams.GetAsync(new GetTeamsRequest(), CancellationToken),
 			nameof(Get_Page_Succeeds));
 
 		// Assert

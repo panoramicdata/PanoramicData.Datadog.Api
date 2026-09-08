@@ -11,9 +11,3 @@ using System.Diagnostics.CodeAnalysis;
 	Scope = "namespaceanddescendants",
 	Target = "~N:Datadog.Api")
 ]
-[assembly: SuppressMessage("Design",
-	"S2360:Optional parameters should not be used",
-	Justification = "Refit maps optional parameters onto optional query-string parameters; overloads cannot express the combinations and a query-object parameter would break the published API",
-	Scope = "namespaceanddescendants",
-	Target = "~N:Datadog.Api.Interfaces")
-]

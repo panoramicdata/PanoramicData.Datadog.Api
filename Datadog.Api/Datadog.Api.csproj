@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Authors>Panoramic Data Limited</Authors>
-    <PackageProjectUrl>https://github.com/panoramicdata/Datadog.Api/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/panoramicdata/Datadog.Api/</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/panoramicdata/PanoramicData.Datadog.Api/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/panoramicdata/PanoramicData.Datadog.Api/</RepositoryUrl>
     <Copyright>Copyright © Panoramic Data Limited 2025</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -43,6 +43,13 @@
 
       Consumers should upgrade, review existing Debug logs for previously captured keys, and rotate
       any key that appears in them.
+
+      Filtered endpoints on IMetrics, ITeams and IUsage now take a request object. The old
+      optional-parameter overloads still work but are obsolete and will be removed in 3.0; they
+      produce byte-identical requests, so migration is mechanical.
+
+      Breaking: GetMetadataAsync and GetRelatedAssetsAsync now require a CancellationToken, matching
+      the rest of the library.
     </PackageReleaseNotes>
     <NeutralResourcesLanguage>en</NeutralResourcesLanguage>
     <NoWarn>$(NoWarn);CS1591</NoWarn>

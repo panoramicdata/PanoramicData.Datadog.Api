@@ -14,6 +14,30 @@ public interface IUsage
 	/// Get hourly usage by product family.
 	/// This endpoint requires the usage_read authorization scope.
 	/// </summary>
+	/// <param name="request">The query parameters.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
+	/// <seealso href="https://docs.datadoghq.com/api/latest/usage-metering/?code-lang=curl#get-hourly-usage-by-product-family"/>
+	[Get("/v2/usage/hourly_usage")]
+	Task<StringIdentifiedResponse<HourlyUsage>> GetHourlyUsageAsync(
+		GetHourlyUsageRequest request,
+		CancellationToken cancellationToken);
+
+	/// <summary>
+	/// Get hourly usage attribution. Multi-region data is available starting March 1, 2023.
+	/// This endpoint requires the usage_read authorization scope.
+	/// </summary>
+	/// <param name="request">The query parameters.</param>
+	/// <param name="cancellationToken">The cancellation token.</param>
+	/// <seealso href="https://docs.datadoghq.com/api/latest/usage-metering/?code-lang=curl#get-hourly-usage-attribution"/>
+	[Get("/v1/usage/hourly-attribution")]
+	Task<HourlyUsageAttributionResponse> GetHourlyUsageAttributionAsync(
+		GetHourlyUsageAttributionRequest request,
+		CancellationToken cancellationToken);
+
+	/// <summary>
+	/// Get hourly usage by product family.
+	/// This endpoint requires the usage_read authorization scope.
+	/// </summary>
 	/// <param name="startHour">Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.</param>
 	/// <param name="endHour">Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending before this hour.</param>
 	/// <param name="productFamilies">Comma separated list of product families to retrieve.</param>
@@ -24,6 +48,7 @@ public interface IUsage
 	/// <param name="nextRecordId">List following results with a next_record_id provided in the previous query.</param>
 	/// <param name="cancellationToken"></param>
 	/// <seealso href="https://docs.datadoghq.com/api/latest/usage-metering/?code-lang=curl#get-hourly-usage-by-product-family"/>
+	[Obsolete("Use the GetHourlyUsageRequest overload. This method will be removed in 3.0.")]
 	[Get("/v2/usage/hourly_usage")]
 	Task<StringIdentifiedResponse<HourlyUsage>> GetHourlyUsageAsync(
 		[AliasAs("filter[timestamp][start]")] string startHour,
@@ -48,6 +73,7 @@ public interface IUsage
 	/// <param name="includeDescendants">Include child org usage in the response. Defaults to true.</param>
 	/// <param name="cancellationToken"></param>
 	/// <seealso href="https://docs.datadoghq.com/api/latest/usage-metering/?code-lang=curl#get-hourly-usage-attribution"/>
+	[Obsolete("Use the GetHourlyUsageAttributionRequest overload. This method will be removed in 3.0.")]
 	[Get("/v1/usage/hourly-attribution")]
 	public Task<HourlyUsageAttributionResponse> GetHourlyUsageAttributionAsync(
 		[AliasAs("start_hr")] string startHour,
