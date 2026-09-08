@@ -3,6 +3,8 @@ using System.Globalization;
 
 namespace Datadog.Api.Test;
 
+#pragma warning disable CS0618 // TODO Task 8: migrate to request-object overloads
+
 public class UsageTests(DatadogClientFixture fixture, ITestOutputHelper output) : BaseTest(fixture, output)
 {
 	[Fact]
@@ -51,3 +53,5 @@ public class UsageTests(DatadogClientFixture fixture, ITestOutputHelper output) 
 		result.Should().NotBeNull();
 	}
 }
+
+#pragma warning restore CS0618
