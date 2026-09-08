@@ -40,6 +40,18 @@ public interface IMetrics
 	/// Get a list of metrics.
 	/// Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified). This endpoint requires the metrics_read authorization scope.
 	/// </summary>
+	/// <param name="request">The query parameters.</param>
+	/// <param name="cancellationToken">The cancellation token</param>
+	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-a-list-of-metrics"/>
+	[Get("/v2/metrics")]
+	Task<MetricsResponse> GetMetricsAsync(
+		GetMetricsRequest request,
+		CancellationToken cancellationToken);
+
+	/// <summary>
+	/// Get a list of metrics.
+	/// Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified). This endpoint requires the metrics_read authorization scope.
+	/// </summary>
 	/// <param name="filterConfigured">Filter custom metrics that have configured tags.</param>
 	/// <param name="filterTagsConfigured">Filter tag configurations by configured tags.</param>
 	/// <param name="filterMetricType">Filter metrics by metric type.	Allowed enum values : gauge, count, rate, distribution</param>
@@ -48,7 +60,8 @@ public interface IMetrics
 	/// <param name="filterTags">Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions. Can only be combined with the filter[queried] filter.</param>
 	/// <param name="windowSeconds">The number of seconds of look back (from now) to apply to a filter[tag] or filter[queried] query. Default value is 3600 (1 hour), maximum value is 2,592,000 (30 days).</param>
 	/// <param name="cancellationToken">The cancellation token</param>
-	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-a-list-of-metrics"/>"
+	/// <seealso href="https://docs.datadoghq.com/api/latest/metrics/#get-a-list-of-metrics"/>
+	[Obsolete("Use the GetMetricsRequest overload. This method will be removed in 3.0.")]
 	[Get("/v2/metrics")]
 	Task<MetricsResponse> GetMetricsAsync(
 		[AliasAs("filter[configured]")] bool? filterConfigured = null,

@@ -36,6 +36,45 @@ public class MetricsRequestUriTests
 		viaObject.Should().Be("/v1/metrics?from=1757000000");
 		viaObject.Should().Be(viaLegacy);
 	}
+
+	[Fact]
+	public async Task GetMetrics_RequestObject_MatchesLegacyUri()
+	{
+		var viaObject = await RequestUriTestHarness.CaptureUriAsync<IMetrics>(
+			api => api.GetMetricsAsync(
+				new GetMetricsRequest
+				{
+					FilterConfigured = true,
+					FilterTagsConfigured = "env",
+					FilterMetricType = MetricType.Gauge,
+					FilterIncludePercentiles = false,
+					FilterQueried = true,
+					FilterTags = "env:prod",
+					WindowSeconds = 3600
+				},
+				CancellationToken));
+
+		var viaLegacy = await RequestUriTestHarness.CaptureUriAsync<IMetrics>(
+			api => api.GetMetricsAsync(true, "env", MetricType.Gauge, false, true, "env:prod", 3600, CancellationToken));
+
+		viaObject.Should().Be(
+			"/v2/metrics?filter[configured]=True&filter[tags_configured]=env&filter[metric_type]=gauge" +
+			"&filter[include_percentiles]=False&filter[queried]=True&filter[tags]=env:prod&window[seconds]=3600");
+		viaObject.Should().Be(viaLegacy);
+	}
+
+	[Fact]
+	public async Task GetMetrics_EmptyRequestObject_SendsNoQuery()
+	{
+		var viaObject = await RequestUriTestHarness.CaptureUriAsync<IMetrics>(
+			api => api.GetMetricsAsync(new GetMetricsRequest(), CancellationToken));
+
+		var viaLegacy = await RequestUriTestHarness.CaptureUriAsync<IMetrics>(
+			api => api.GetMetricsAsync(cancellationToken: CancellationToken));
+
+		viaObject.Should().Be("/v2/metrics");
+		viaObject.Should().Be(viaLegacy);
+	}
 }
 
 #pragma warning restore CS0618
