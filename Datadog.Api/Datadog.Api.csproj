@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Authors>Panoramic Data Limited</Authors>
-    <PackageProjectUrl>https://github.com/panoramicdata/Datadog.Api/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/panoramicdata/Datadog.Api/</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/panoramicdata/PanoramicData.Datadog.Api/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/panoramicdata/PanoramicData.Datadog.Api/</RepositoryUrl>
     <Copyright>Copyright © Panoramic Data Limited 2025</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

@@ -1,10 +1,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![NuGet version](https://img.shields.io/nuget/v/Datadog.Api.svg)](https://www.nuget.org/packages/Datadog.Api/)
+[![NuGet version](https://img.shields.io/nuget/v/PanoramicData.Datadog.Api.svg)](https://www.nuget.org/packages/PanoramicData.Datadog.Api/)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/grade/Datadog.Api)](https://app.codacy.com/gh/panoramicdata/Datadog.Api/dashboard)
+[![Codacy Badge](https://app.codacy.com/project/badge/grade/Datadog.Api)](https://app.codacy.com/gh/panoramicdata/PanoramicData.Datadog.Api/dashboard)
 
-# Datadog.Api
+# PanoramicData.Datadog.Api
 
 A .NET API for Datadog
 
