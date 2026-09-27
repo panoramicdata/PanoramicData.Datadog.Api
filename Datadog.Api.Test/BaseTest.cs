@@ -3,6 +3,9 @@ using Refit;
 
 namespace Datadog.Api.Test;
 
+// Integration: every class derived from this base calls the live Datadog API with an API key from
+// user secrets. CI has neither, so they are excluded there with Category!=Integration.
+[Trait("Category", "Integration")]
 public class BaseTest : IClassFixture<DatadogClientFixture>
 {
 	protected DatadogClient Client { get; }
