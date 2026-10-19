@@ -8,6 +8,12 @@
 
 A .NET API for Datadog
 
+## Installation
+
+```sh
+dotnet add package PanoramicData.Datadog.Api
+```
+
 ## Unit Tests
 
 To run unit tests, set up your unit test User secrets to match the usersecrets.example.json file.
