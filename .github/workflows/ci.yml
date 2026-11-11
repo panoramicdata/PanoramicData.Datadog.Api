@@ -77,7 +77,7 @@ jobs:
     # key from user secrets.
     - name: Run tests with coverage
       run: >-
-        ./Datadog.Api.Test/bin/Debug/net10.0/Datadog.Api.Test
+        ./Datadog.Api.Test/bin/Debug/net11.0/Datadog.Api.Test
         --coverage
         --coverage-settings "$GITHUB_WORKSPACE/coverage.config"
         --coverage-output-format cobertura
@@ -92,7 +92,7 @@ jobs:
       uses: codacy/codacy-coverage-reporter-action@v1
       with:
         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        coverage-reports: Datadog.Api.Test/bin/Debug/net10.0/TestResults/coverage.cobertura.xml
+        coverage-reports: Datadog.Api.Test/bin/Debug/net11.0/TestResults/coverage.cobertura.xml
 
     - name: Upload coverage artifact
       if: always()
@@ -100,7 +100,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: coverage
-        path: Datadog.Api.Test/bin/Debug/net10.0/TestResults/coverage.cobertura.xml
+        path: Datadog.Api.Test/bin/Debug/net11.0/TestResults/coverage.cobertura.xml
         retention-days: 7
 
   publish:
