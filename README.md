@@ -8,6 +8,8 @@
 
 A .NET API for Datadog
 
+Supports .NET 11.0.
+
 ## Installation
 
 ```sh
