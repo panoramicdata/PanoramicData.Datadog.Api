@@ -1,6 +1,7 @@
 ﻿using Datadog.Api.Models;
 using Datadog.Api.Models.Usage;
 using Refit;
+using System.Runtime.InteropServices;
 
 namespace Datadog.Api.Interfaces;
 
@@ -54,12 +55,12 @@ public interface IUsage
 		[AliasAs("filter[timestamp][start]")] string startHour,
 		[AliasAs("filter[timestamp][end]")] string endHour,
 		[AliasAs("filter[product_families]")] IReadOnlyCollection<ProductFamily> productFamilies,
-		[AliasAs("filter[include_descendants]")] bool includeDescendants = false,
-		[AliasAs("filter[include_breakdown]")] bool includeBreakdown = false,
-		[AliasAs("filter[versions]")] string? versions = null,
-		[AliasAs("page[limit]")] int limit = 500,
-		[AliasAs("page[next_record_id]")] string? nextRecordId = null,
-		CancellationToken cancellationToken = default);
+		[Optional] [AliasAs("filter[include_descendants]")] bool includeDescendants,
+		[Optional] [AliasAs("filter[include_breakdown]")] bool includeBreakdown,
+		[Optional] [AliasAs("filter[versions]")] string? versions,
+		[Optional, DefaultParameterValue(500)] [AliasAs("page[limit]")] int limit,
+		[Optional] [AliasAs("page[next_record_id]")] string? nextRecordId,
+		[Optional] CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get hourly usage attribution. Multi-region data is available starting March 1, 2023.
@@ -77,10 +78,10 @@ public interface IUsage
 	[Get("/v1/usage/hourly-attribution")]
 	public Task<HourlyUsageAttributionResponse> GetHourlyUsageAttributionAsync(
 		[AliasAs("start_hr")] string startHour,
-		[AliasAs("end_hr")] string? endHour = null,
-		[AliasAs("usage_type")] UsageType usageType = UsageType.ApiUsage,
-		[AliasAs("next_record_id")] string? nextRecordId = null,
-		[AliasAs("tag_breakdown_keys")] string? tagBreakdownKeys = null,
-		[AliasAs("include_descendants")] bool includeDescendants = true,
-		CancellationToken cancellationToken = default);
+		[Optional] [AliasAs("end_hr")] string? endHour,
+		[Optional, DefaultParameterValue(UsageType.ApiUsage)] [AliasAs("usage_type")] UsageType usageType,
+		[Optional] [AliasAs("next_record_id")] string? nextRecordId,
+		[Optional] [AliasAs("tag_breakdown_keys")] string? tagBreakdownKeys,
+		[Optional, DefaultParameterValue(true)] [AliasAs("include_descendants")] bool includeDescendants,
+		[Optional] CancellationToken cancellationToken);
 }

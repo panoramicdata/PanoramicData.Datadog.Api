@@ -1,5 +1,6 @@
 ﻿using Datadog.Api.Models.Metrics;
 using Refit;
+using System.Runtime.InteropServices;
 
 namespace Datadog.Api.Interfaces;
 
@@ -32,9 +33,9 @@ public interface IMetrics
 	[Get("/v1/metrics")]
 	Task<ActiveMetricsResponse> GetActiveAsync(
 		[AliasAs("from")] long from,
-		[AliasAs("host")] string? host = null,
-		[AliasAs("tag_filter")] string? tagFilter = null,
-		CancellationToken cancellationToken = default);
+		[Optional] [AliasAs("host")] string? host,
+		[Optional] [AliasAs("tag_filter")] string? tagFilter,
+		[Optional] CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get a list of metrics.
@@ -64,14 +65,14 @@ public interface IMetrics
 	[Obsolete("Use the GetMetricsRequest overload. This method will be removed in 3.0.")]
 	[Get("/v2/metrics")]
 	Task<MetricsResponse> GetMetricsAsync(
-		[AliasAs("filter[configured]")] bool? filterConfigured = null,
-		[AliasAs("filter[tags_configured]")] string? filterTagsConfigured = null,
-		[AliasAs("filter[metric_type]")] MetricType? filterMetricType = null,
-		[AliasAs("filter[include_percentiles]")] bool? filterIncludePercentiles = null,
-		[AliasAs("filter[queried]")] bool? filterQueried = null,
-		[AliasAs("filter[tags]")] string? filterTags = null,
-		[AliasAs("window[seconds]")] int? windowSeconds = null,
-		CancellationToken cancellationToken = default);
+		[Optional] [AliasAs("filter[configured]")] bool? filterConfigured,
+		[Optional] [AliasAs("filter[tags_configured]")] string? filterTagsConfigured,
+		[Optional] [AliasAs("filter[metric_type]")] MetricType? filterMetricType,
+		[Optional] [AliasAs("filter[include_percentiles]")] bool? filterIncludePercentiles,
+		[Optional] [AliasAs("filter[queried]")] bool? filterQueried,
+		[Optional] [AliasAs("filter[tags]")] string? filterTags,
+		[Optional] [AliasAs("window[seconds]")] int? windowSeconds,
+		[Optional] CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Get metric metadata
