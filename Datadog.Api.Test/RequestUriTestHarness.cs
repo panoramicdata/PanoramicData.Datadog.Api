@@ -16,6 +16,7 @@ public static class RequestUriTestHarness
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
+			cancellationToken.ThrowIfCancellationRequested();
 			Uri = System.Uri.UnescapeDataString(request.RequestUri!.PathAndQuery);
 
 			return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
