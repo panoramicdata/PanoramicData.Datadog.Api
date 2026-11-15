@@ -162,12 +162,16 @@ public sealed class AuthenticatedHttpClientHandlerTests : IDisposable
 	{
 		public List<string> Messages { get; } = [];
 
-		public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+		public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+		{
+			Messages.Add($"scope {state}");
+			return null;
+		}
 
 		public bool IsEnabled(LogLevel logLevel) => logLevel >= minimum;
 
 		public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-			=> Messages.Add($"{eventId.Id}: {formatter(state, exception)}");
+			=> Messages.Add($"{logLevel} {eventId.Id}: {formatter(state, exception)}{exception?.Message}");
 	}
 }
 
