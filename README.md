@@ -2,7 +2,7 @@
 
 [![NuGet version](https://img.shields.io/nuget/v/PanoramicData.Datadog.Api.svg)](https://www.nuget.org/packages/PanoramicData.Datadog.Api/)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/grade/Datadog.Api)](https://app.codacy.com/gh/panoramicdata/PanoramicData.Datadog.Api/dashboard)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4e01962ab07a430d9c6e1af95d3d68d6)](https://app.codacy.com/gh/panoramicdata/PanoramicData.Datadog.Api/dashboard)
 
 # PanoramicData.Datadog.Api
 
